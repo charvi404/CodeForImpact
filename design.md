@@ -3,103 +3,85 @@
 
 ---
 
-## 1. System Overview
+## 1. Overview
 
-The system consists of:
-- Vendor Interface
-- Customer Interface
-- Backend API Layer
-- AI Processing Layer
-- Data Storage Layer
+This document describes the system architecture and technical design for the AI-powered hyperlocal vendor platform.
 
-The platform enables AI-driven inventory digitization and intelligent product discovery.
+The system leverages AWS cloud services and AI components to provide intelligent inventory digitization and product discovery.
 
 ---
 
 ## 2. High-Level Architecture
 
-Frontend (React / Flutter)
-        ↓
-API Gateway
-        ↓
-AWS Lambda (Business Logic)
-        ↓
-AI Services Layer
-        ↓
-Database Layer
+The system consists of:
+
+- Frontend Layer
+- API & Backend Layer
+- AI Processing Layer
+- Data Storage Layer
 
 ---
 
-## 3. Component Design
+## 3. Component Architecture
 
 ### 3.1 Frontend Layer
+
+- Web or mobile interface
 - Vendor dashboard
-- Customer search interface
-- Map-based shop discovery
-- Responsive UI
+- Customer product search interface
+- Map-based visualization
 
-### 3.2 Backend Layer
-- REST APIs via API Gateway
-- Lambda functions for processing
-- Authentication via Cognito
+### 3.2 API & Backend Layer
 
-### 3.3 AI Layer
+- Amazon API Gateway for request routing
+- AWS Lambda for business logic
+- AWS Cognito for authentication
 
-- Amazon Textract:
-  Extract text from uploaded inventory images
+### 3.3 AI Processing Layer
 
-- Amazon Transcribe:
-  Convert voice inventory input to text
-
-- Amazon Bedrock (LLM):
+- Amazon Textract for OCR-based inventory extraction
+- Amazon Transcribe for voice-to-text conversion
+- Amazon Bedrock (LLM) for:
   - Auto-categorization
-  - Semantic query understanding
-  - Marketing content generation
+  - Semantic search
+  - Content generation
+- Embedding-based vector search for intelligent matching
+- Demand prediction module for restocking insights
 
-- Vector Search:
-  Product similarity matching
+### 3.4 Data Storage Layer
 
-- Demand Prediction Engine:
-  Analyze search trends & vendor data
-
-### 3.4 Data Layer
-
-- DynamoDB:
-  Store vendor inventory
-- S3:
-  Store images & uploads
+- Amazon DynamoDB for inventory storage
+- Amazon S3 for images and uploads
+- Optional OpenSearch for enhanced search indexing
 
 ---
 
-## 4. Process Flow
+## 4. System Workflow
 
-Vendor Flow:
-1. Vendor uploads inventory
-2. AI extracts & structures product data
-3. Inventory stored in database
-4. Demand insights generated
+### Vendor Workflow
+1. Vendor uploads inventory.
+2. AI extracts and structures product data.
+3. Inventory stored in database.
+4. Demand insights generated and displayed.
 
-Customer Flow:
-1. Customer searches product
-2. Query processed using semantic AI
-3. Matching vendors retrieved
-4. Ranked results displayed
-
----
-
-## 5. Why AI is Essential
-
-- Manual categorization is inefficient
-- Keyword-based search is insufficient
-- Demand forecasting requires pattern analysis
-- Local language understanding requires NLP
-
-AI enables intelligent automation rather than rule-based filtering.
+### Customer Workflow
+1. Customer submits product query.
+2. Query processed using semantic AI.
+3. Relevant vendors retrieved from database.
+4. Ranked results displayed based on relevance and proximity.
 
 ---
 
-## 6. Scalability Considerations
+## 5. Scalability & Reliability
 
-- Serverless backend ensures scalability
-- Cloud-based storage for large datasets
-- Modular AI services for future expansion
+- Serverless architecture ensures automatic scaling.
+- Cloud-based storage supports large inventory datasets.
+- Modular AI services allow independent scaling of components.
+
+---
+
+## 6. Security Considerations
+
+- Secure authentication via Cognito
+- Encrypted data storage
+- Role-based access for vendors and customers
